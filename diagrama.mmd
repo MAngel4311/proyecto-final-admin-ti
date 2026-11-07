@@ -1,0 +1,40 @@
+
+flowchart LR
+
+    subgraph RED["Red local de la CRQ"]
+        CLIENTES["Equipos clientes"]
+        LINUX["Clientes Linux"]
+        WINDOWS["Clientes Windows / Mac"]
+        IMPRESORAS["Impresoras de red"]
+    end
+
+    subgraph DOKPLOY["Plataforma de aplicaciones"]
+        TRAEFIK["Dokploy / Traefik"]
+        WEB["Servidor web Nginx"]
+        API["Backend API"]
+        PANEL["Panel administrativo"]
+        DB[("Base de datos MySQL / PostgreSQL")]
+
+        TRAEFIK --> WEB
+        TRAEFIK --> API
+        TRAEFIK --> PANEL
+        API --> DB
+    end
+
+    subgraph SERVIDOR["Servidor Linux - Servicios de infraestructura"]
+        NTP["NTP - Sincronización horaria"]
+        NFS["NFS - Archivos compartidos"]
+        NIS["NIS - Autenticación centralizada"]
+        CUPS["CUPS - Servicio de impresión"]
+        SAMBA["Samba - Compartición de archivos"]
+    end
+
+    CLIENTES --> TRAEFIK
+
+    NTP --> CLIENTES
+    NFS --> LINUX
+    NIS --> LINUX
+    CUPS --> IMPRESORAS
+    SAMBA --> WINDOWS
+
+    CLIENTES -. "Solicitudes de impresión" .-> CUPS
