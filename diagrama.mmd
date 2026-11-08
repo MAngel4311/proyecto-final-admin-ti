@@ -38,3 +38,15 @@ flowchart LR
     SAMBA --> WINDOWS
 
     CLIENTES -. "Solicitudes de impresión" .-> CUPS
+
+    classDef red fill:#e8f1ff,stroke:#2563eb,color:#0f172a
+    classDef plataforma fill:#e8f8ee,stroke:#16a34a,color:#0f172a
+    classDef servidor fill:#fff4e5,stroke:#ea580c,color:#0f172a
+
+    class CLIENTES,LINUX,WINDOWS,IMPRESORAS red
+    class TRAEFIK,WEB,API,PANEL,DB plataforma
+    class NTP,NFS,NIS,CUPS,SAMBA servidor
+
+    style RED fill:#f5f9ff,stroke:#2563eb
+    style DOKPLOY fill:#f4fbf6,stroke:#16a34a
+    style SERVIDOR fill:#fffaf2,stroke:#ea580c
